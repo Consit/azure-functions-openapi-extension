@@ -7,7 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Extensions;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
-
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
@@ -27,9 +27,10 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors
         /// <inheritdoc />
         public override bool IsVisitable(Type type)
         {
+            var stringEnumConverterIsDefault = JsonConvert.DefaultSettings().Converters.Any(a => a.GetType() == typeof(StringEnumConverter));
             var isVisitable = (this.IsVisitable(type, TypeCode.Int16) || this.IsVisitable(type, TypeCode.Int32) || this.IsVisitable(type, TypeCode.Int64)) &&
                               type.IsUnflaggedEnumType() &&
-                              type.HasJsonConverterAttribute<StringEnumConverter>()
+                              (stringEnumConverterIsDefault || type.HasJsonConverterAttribute<StringEnumConverter>())
                               ;
 
             return isVisitable;

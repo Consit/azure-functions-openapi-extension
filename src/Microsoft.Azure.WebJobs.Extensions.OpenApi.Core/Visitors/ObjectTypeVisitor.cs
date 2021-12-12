@@ -53,6 +53,10 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors
             {
                 isVisitable = false;
             }
+            else if (type.Name == "OpenApiByteThing")
+            {
+                isVisitable = false;
+            }
             else if (type.IsOpenApiArray())
             {
                 isVisitable = false;

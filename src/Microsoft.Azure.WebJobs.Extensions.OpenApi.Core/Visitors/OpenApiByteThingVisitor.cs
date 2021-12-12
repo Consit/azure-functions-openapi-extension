@@ -1,20 +1,22 @@
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
-
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Abstractions;
-using Microsoft.OpenApi.Models;
-
-using Newtonsoft.Json.Serialization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors
 {
     /// <summary>
-    /// This represents the type visitor for <see cref="decimal"/>.
+    /// This represents the type visitor for byte array.
     /// </summary>
-    public class DecimalTypeVisitor : TypeVisitor
+    public class OpenApiByteThingVisitor : TypeVisitor
     {
         /// <inheritdoc />
-        public DecimalTypeVisitor(VisitorCollection visitorCollection)
+        public OpenApiByteThingVisitor(VisitorCollection visitorCollection)
             : base(visitorCollection)
         {
         }
@@ -22,7 +24,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors
         /// <inheritdoc />
         public override bool IsVisitable(Type type)
         {
-            var isVisitable = this.IsVisitable(type, TypeCode.Decimal);
+            var isVisitable = this.IsVisitable(type, TypeCode.Object) && (type.Name == "OpenApiByteThing");
 
             return isVisitable;
         }
@@ -30,7 +32,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors
         /// <inheritdoc />
         public override void Visit(IAcceptor acceptor, KeyValuePair<string, Type> type, NamingStrategy namingStrategy, params Attribute[] attributes)
         {
-            this.Visit(acceptor, name: type.Key, title: null, dataType: "number", dataFormat: "decimal", attributes: attributes);
+            this.Visit(acceptor, name: type.Key, title: null, dataType: "string", dataFormat: "binary", attributes: attributes);
         }
 
         /// <inheritdoc />
@@ -44,7 +46,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors
         /// <inheritdoc />
         public override OpenApiSchema ParameterVisit(Type type, NamingStrategy namingStrategy)
         {
-            return this.ParameterVisit(dataType: "number", dataFormat: "decimal");
+            return this.ParameterVisit(dataType: "string", dataFormat: "binary");
         }
 
         /// <inheritdoc />
@@ -58,7 +60,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors
         /// <inheritdoc />
         public override OpenApiSchema PayloadVisit(Type type, NamingStrategy namingStrategy)
         {
-            return this.PayloadVisit(dataType: "number", dataFormat: "decimal");
+            return this.PayloadVisit(dataType: "string", dataFormat: "binary");
         }
     }
 }
