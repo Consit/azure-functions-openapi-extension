@@ -61,6 +61,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors
             var name = subAcceptor.Schemas.First().Key;
             var schema = subAcceptor.Schemas.First().Value;
             schema.Nullable = true;
+            var hadDefault = false;
 
             // Adds the extra properties.
             if (attributes.Any())
@@ -70,6 +71,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors
                 {
                     schema.Nullable = this.GetOpenApiPropertyNullable(attr as OpenApiPropertyAttribute);
                     schema.Default = this.GetOpenApiPropertyDefault(attr as OpenApiPropertyAttribute);
+                    hadDefault = schema.Default != null;
                     schema.Description = this.GetOpenApiPropertyDescription(attr as OpenApiPropertyAttribute);
                 }
 
@@ -82,6 +84,11 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors
                 }
                 schema.ApplyValidationAttributes(attributes.OfType<ValidationAttribute>());
             }
+            if (!hadDefault)
+            {
+                schema.Default = null;
+            }
+
             instance.Schemas.Add(name, schema);
         }
 
@@ -119,6 +126,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Visitors
             var schema = this.VisitorCollection.PayloadVisit(underlyingType, namingStrategy);
 
             schema.Nullable = true;
+            schema.Default = null;
 
             return schema;
         }
