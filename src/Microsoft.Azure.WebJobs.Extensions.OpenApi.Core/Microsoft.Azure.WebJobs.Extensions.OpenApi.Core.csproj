@@ -15,9 +15,22 @@
     <PackageTags>Azure-Functions, OpenAPI, Swagger, Swagger-UI</PackageTags>
     <AssemblyName>Microsoft.Azure.WebJobs.Extensions.OpenApi.Core</AssemblyName>
     <RootNamespace>Microsoft.Azure.WebJobs.Extensions.OpenApi.Core</RootNamespace>
+    <Configurations>Debug;Release;Dev;Test;Prod</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DocumentationFile>bin\Debug\netstandard2.0\Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Test'">
+    <DocumentationFile>bin\Debug\netstandard2.0\Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Dev'">
+    <DocumentationFile>bin\Debug\netstandard2.0\Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Prod'">
     <DocumentationFile>bin\Debug\netstandard2.0\Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.xml</DocumentationFile>
   </PropertyGroup>
 
@@ -26,6 +39,18 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dev|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Prod|AnyCPU'">
     <Optimize>False</Optimize>
   </PropertyGroup>
 

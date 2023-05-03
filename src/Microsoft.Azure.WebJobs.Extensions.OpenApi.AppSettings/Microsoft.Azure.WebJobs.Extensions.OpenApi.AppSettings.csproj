@@ -15,9 +15,18 @@
     <PackageTags>Azure-Functions, Configuration, AppSettings</PackageTags>
     <AssemblyName>Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings</AssemblyName>
     <RootNamespace>Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings</RootNamespace>
+    <Configurations>Debug;Release;Dev;Test;Prod</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DocumentationFile>bin\Debug\netstandard2.0\Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Test'">
+    <DocumentationFile>bin\Debug\netstandard2.0\Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Dev'">
     <DocumentationFile>bin\Debug\netstandard2.0\Microsoft.Azure.WebJobs.Extensions.OpenApi.Configuration.AppSettings.xml</DocumentationFile>
   </PropertyGroup>
 

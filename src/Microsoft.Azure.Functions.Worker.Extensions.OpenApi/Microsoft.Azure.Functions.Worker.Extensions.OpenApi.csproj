@@ -15,6 +15,7 @@
     <PackageTags>Azure-Functions, OpenAPI, Swagger, Swagger-UI</PackageTags>
     <AssemblyName>Microsoft.Azure.Functions.Worker.Extensions.OpenApi</AssemblyName>
     <RootNamespace>Microsoft.Azure.Functions.Worker.Extensions.OpenApi</RootNamespace>
+    <Configurations>Debug;Release;Dev;Test;Prod</Configurations>
 
     <!--Version information-->
     <!-- <VersionPrefix>1.0.0</VersionPrefix>
@@ -22,6 +23,18 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DocumentationFile>bin\Debug\net5.0\Microsoft.Azure.Functions.Worker.Extensions.OpenApi.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Test'">
+    <DocumentationFile>bin\Debug\net5.0\Microsoft.Azure.Functions.Worker.Extensions.OpenApi.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Dev'">
+    <DocumentationFile>bin\Debug\net5.0\Microsoft.Azure.Functions.Worker.Extensions.OpenApi.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Prod'">
     <DocumentationFile>bin\Debug\net5.0\Microsoft.Azure.Functions.Worker.Extensions.OpenApi.xml</DocumentationFile>
   </PropertyGroup>
 
